@@ -1,0 +1,13 @@
+- FundTransfer API
+	http://localhost:5000/swagger
+
+- Acesso API
+	http://localhost:6123/swagger
+	
+- Seq logs
+	http://localhost:6124 - dashboard
+	
+- RabbitMQ
+	http://localhost:6125 - dashboard
+	user: guest
+	passwd: guest
