@@ -28,8 +28,6 @@ namespace TechCase.Services.Worker.FundTransferFailed
             Event eventReceived = deliveryEventArgs.Body.ToArray().To<Event>();
             _logger.Information("Event received {@EventReceived}", eventReceived);
 
-            Console.WriteLine($"Message received with Correlation: {eventReceived.Correlation}", ConsoleColor.Green);
-
             var eventError = eventReceived.GetEntity<EventError>();
             var transferRequest = _transferRepository.GetFirstBy(x => x.Id == Guid.Parse(eventReceived.TransferRequestId));
             transferRequest.UpdateStatus(TransferRequestStatus.Error).UpdateComments(eventError.Message);

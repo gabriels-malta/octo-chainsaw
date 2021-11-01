@@ -31,7 +31,6 @@ namespace TechCase.Services.Worker.FundTransferTriggered
         {
             Event eventReceived = deliveryEventArgs.Body.ToArray().To<Event>();
             _logger.Information("Event received {@EventReceived}", eventReceived);
-            Console.WriteLine($"Message received with Correlation: {eventReceived.Correlation}", ConsoleColor.Green);
 
             var transferRequest = eventReceived.GetEntity<TransferRequest>();
 
