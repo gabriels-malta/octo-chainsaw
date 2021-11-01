@@ -18,7 +18,7 @@ Get the system started by following the steps below:
 - execute the file ./src/**run-system.cmd**
 
 ### Dashboards and API's Swagger
-- Fund Transfer API: http:localhost:5000/swagger
+- Fund Transfer API: http://localhost:5000/swagger
 - Acesso API: http://localhost:6123/swagger
 - Logs: http://localhost:6124
 - Message Broker: http://localhost:6125
