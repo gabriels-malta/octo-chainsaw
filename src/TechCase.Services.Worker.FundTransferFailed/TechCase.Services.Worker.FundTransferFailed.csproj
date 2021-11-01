@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\TechCase.FundTransfer.Infrastructure.Database\TechCase.FundTransfer.Infrastructure.Database.csproj" />
+    <ProjectReference Include="..\TechCase.FundTransfer.Infrastructure.Queue\TechCase.FundTransfer.Infrastructure.Queue.csproj" />
+  </ItemGroup>
+
+</Project>

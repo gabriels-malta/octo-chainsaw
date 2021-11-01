@@ -1,0 +1,107 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.Services.Api.FundTransfer", "TechCase.Services.Api.FundTransfer\TechCase.Services.Api.FundTransfer.csproj", "{E1036D51-31B6-440E-BDDD-FF2743092EE7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.FundTransfer.Core", "TechCase.FundTransfer.Core\TechCase.FundTransfer.Core.csproj", "{8073997E-6765-4F40-B23C-CEBF1CBAE1C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{36154FCE-D36C-4EAB-BC97-4ACDE707C9FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.FundTransfer.Infrastructure.Queue", "TechCase.FundTransfer.Infrastructure.Queue\TechCase.FundTransfer.Infrastructure.Queue.csproj", "{4F38977F-AC08-4B96-B004-9EDF8FA32CE9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.FundTransfer.Infrastructure.Database", "TechCase.FundTransfer.Infrastructure.Database\TechCase.FundTransfer.Infrastructure.Database.csproj", "{F8C67128-2C19-4774-8AD2-BBD448D99E93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{4B32034A-9197-452E-BE74-6D29F9BFB2DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C813A929-2A28-461A-A0A1-F8DB82BB5555}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		run-workers.ps1 = run-workers.ps1
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.Services.Worker.FundTransferStarter", "TechCase.Services.Worker.FundTransferStarter\TechCase.Services.Worker.FundTransferStarter.csproj", "{75BF284E-0FE6-4517-BCC8-149B68F21168}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.Services.Worker.AccountDiscovery", "TechCase.Services.Worker.AccountDiscovery\TechCase.Services.Worker.AccountDiscovery.csproj", "{C3680F66-EA88-4A77-A6DC-23A155FFE511}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.Services.Worker.FundTransferTriggered", "TechCase.Services.Worker.FundTransferTriggered\TechCase.Services.Worker.FundTransferTriggered.csproj", "{CFCC38A4-F0E5-47A9-A852-0BA98D1DBE47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.Services.Worker.FundTransferFailed", "TechCase.Services.Worker.FundTransferFailed\TechCase.Services.Worker.FundTransferFailed.csproj", "{25BD92EA-3DB2-4903-8995-FC0C89832749}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.Services.Worker.AccountUpdate", "TechCase.Services.Worker.AccountUpdate\TechCase.Services.Worker.AccountUpdate.csproj", "{BE3C8119-D0CD-4203-9371-39ED8F96C174}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.Services.Worker.FundTransferFinished", "TechCase.Services.Worker.FundTransferFinished\TechCase.Services.Worker.FundTransferFinished.csproj", "{F8A959A4-2AA3-44AC-8221-20B2F9994529}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechCase.FundTransfer.Core.Test", "TechCase.FundTransfer.Core.Test\TechCase.FundTransfer.Core.Test.csproj", "{83755DDA-B2CE-4140-A523-3AB5D7768857}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1036D51-31B6-440E-BDDD-FF2743092EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1036D51-31B6-440E-BDDD-FF2743092EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1036D51-31B6-440E-BDDD-FF2743092EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1036D51-31B6-440E-BDDD-FF2743092EE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8073997E-6765-4F40-B23C-CEBF1CBAE1C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8073997E-6765-4F40-B23C-CEBF1CBAE1C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8073997E-6765-4F40-B23C-CEBF1CBAE1C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8073997E-6765-4F40-B23C-CEBF1CBAE1C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F38977F-AC08-4B96-B004-9EDF8FA32CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F38977F-AC08-4B96-B004-9EDF8FA32CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F38977F-AC08-4B96-B004-9EDF8FA32CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F38977F-AC08-4B96-B004-9EDF8FA32CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8C67128-2C19-4774-8AD2-BBD448D99E93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8C67128-2C19-4774-8AD2-BBD448D99E93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8C67128-2C19-4774-8AD2-BBD448D99E93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8C67128-2C19-4774-8AD2-BBD448D99E93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75BF284E-0FE6-4517-BCC8-149B68F21168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75BF284E-0FE6-4517-BCC8-149B68F21168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75BF284E-0FE6-4517-BCC8-149B68F21168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75BF284E-0FE6-4517-BCC8-149B68F21168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3680F66-EA88-4A77-A6DC-23A155FFE511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3680F66-EA88-4A77-A6DC-23A155FFE511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3680F66-EA88-4A77-A6DC-23A155FFE511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3680F66-EA88-4A77-A6DC-23A155FFE511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFCC38A4-F0E5-47A9-A852-0BA98D1DBE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFCC38A4-F0E5-47A9-A852-0BA98D1DBE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFCC38A4-F0E5-47A9-A852-0BA98D1DBE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFCC38A4-F0E5-47A9-A852-0BA98D1DBE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25BD92EA-3DB2-4903-8995-FC0C89832749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25BD92EA-3DB2-4903-8995-FC0C89832749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25BD92EA-3DB2-4903-8995-FC0C89832749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25BD92EA-3DB2-4903-8995-FC0C89832749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE3C8119-D0CD-4203-9371-39ED8F96C174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE3C8119-D0CD-4203-9371-39ED8F96C174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE3C8119-D0CD-4203-9371-39ED8F96C174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE3C8119-D0CD-4203-9371-39ED8F96C174}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8A959A4-2AA3-44AC-8221-20B2F9994529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A959A4-2AA3-44AC-8221-20B2F9994529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A959A4-2AA3-44AC-8221-20B2F9994529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A959A4-2AA3-44AC-8221-20B2F9994529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83755DDA-B2CE-4140-A523-3AB5D7768857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83755DDA-B2CE-4140-A523-3AB5D7768857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83755DDA-B2CE-4140-A523-3AB5D7768857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83755DDA-B2CE-4140-A523-3AB5D7768857}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E1036D51-31B6-440E-BDDD-FF2743092EE7} = {36154FCE-D36C-4EAB-BC97-4ACDE707C9FF}
+		{8073997E-6765-4F40-B23C-CEBF1CBAE1C9} = {4B32034A-9197-452E-BE74-6D29F9BFB2DB}
+		{4F38977F-AC08-4B96-B004-9EDF8FA32CE9} = {4B32034A-9197-452E-BE74-6D29F9BFB2DB}
+		{F8C67128-2C19-4774-8AD2-BBD448D99E93} = {4B32034A-9197-452E-BE74-6D29F9BFB2DB}
+		{75BF284E-0FE6-4517-BCC8-149B68F21168} = {36154FCE-D36C-4EAB-BC97-4ACDE707C9FF}
+		{C3680F66-EA88-4A77-A6DC-23A155FFE511} = {36154FCE-D36C-4EAB-BC97-4ACDE707C9FF}
+		{CFCC38A4-F0E5-47A9-A852-0BA98D1DBE47} = {36154FCE-D36C-4EAB-BC97-4ACDE707C9FF}
+		{25BD92EA-3DB2-4903-8995-FC0C89832749} = {36154FCE-D36C-4EAB-BC97-4ACDE707C9FF}
+		{BE3C8119-D0CD-4203-9371-39ED8F96C174} = {36154FCE-D36C-4EAB-BC97-4ACDE707C9FF}
+		{F8A959A4-2AA3-44AC-8221-20B2F9994529} = {36154FCE-D36C-4EAB-BC97-4ACDE707C9FF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B09778E6-D3FD-4636-A28D-1CD777956C31}
+	EndGlobalSection
+EndGlobal

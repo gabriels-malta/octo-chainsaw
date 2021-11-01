@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TechCase.FundTransfer.Infrastructure.Database\TechCase.FundTransfer.Infrastructure.Database.csproj" />
+    <ProjectReference Include="..\TechCase.FundTransfer.Infrastructure.Queue\TechCase.FundTransfer.Infrastructure.Queue.csproj" />
+  </ItemGroup>
+
+</Project>

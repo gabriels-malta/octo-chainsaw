@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  postgresdb:
+   image: postgres:latest
+   container_name: fund-transfer-db
+   restart: always
+   environment:
+     POSTGRES_USER: utechcase
+     POSTGRES_PASSWORD: qwerty
+   ports:
+     - "5432:5432"
+   volumes:
+     - "dbdata:/var/lib/postgresql/data"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: queue-service
+    ports:
+      - "5672:5672"
+      -  "6125:15672"
+    volumes:
+      - "rabbitdata:/var/lib/rabbitmq"
+
+  acesso-api:
+    image: baldini/testacesso
+    container_name: acesso-api
+    ports:
+      - "6123:80"
+
+  seq:
+    image: datalust/seq:latest
+    container_name: logs
+    ports:
+      - "6124:80"
+      - "5341:5341"
+    environment:
+      ACCEPT_EULA: "Y"
+    volumes:
+      - "logdata:/data"
+
+volumes:
+  dbdata:
+  logdata:
+  rabbitdata:
