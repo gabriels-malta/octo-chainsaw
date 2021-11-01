@@ -1,7 +1,7 @@
 # Acesso-Bankly
 ## Tech Case - solution proposal
 
-The system follows an event-driven architecture, coordinated by choreography between the queues.
+The system follows an event-driven architecture, coordinated by choreography a message broker.
 
 Important to notice that this isn't a bunch of microservices. It is a monolith that has a loosely coupled approach to handle each step of the workflow.
 
