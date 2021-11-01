@@ -1,5 +1,9 @@
 # Acesso-Bankly
-## Tech Case - solutions proposal
+## Tech Case - solution proposal
+
+The system follows an event-driven architecture, coordinated by choreography between the queues.
+
+Important to notice that this isn't a bunch of microservices. It is a monolith that has a loosely coupled approach to handle each step of the workflow.
 
 ### Requirements
 - SDK .net5.0
@@ -9,7 +13,7 @@
 - Windows Terminal _(this is required to execute all queue workers in at once)_
 
 ### Getting started
-Get system started by following the steps below:
+Get the system started by following the steps below:
 - run the file ./src/**docker-compose.yml**
 - execute the file ./src/**run-system.cmd**
 
