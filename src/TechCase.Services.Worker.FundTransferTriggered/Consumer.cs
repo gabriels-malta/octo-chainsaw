@@ -40,7 +40,7 @@ namespace TechCase.Services.Worker.FundTransferTriggered
             if (!originAcc.HaveEnoughMoney(transferRequest.Value))
             {
                 _logger.Information("Origin account {AccountNumber} does not have enough money to commit the transfer", destinationAcc.AccountNumber);
-                EventError eventError = new($"Destination account {destinationAcc.AccountNumber} does not have enough fund.");
+                EventError eventError = new($"Origin account {destinationAcc.AccountNumber} does not have enough fund.");
                 var transferRequestFailEvent = Event.UseToSeedNew(eventError, QueueTopics.FundTransferFailed, eventReceived);
                 _publisher.Publish(transferRequestFailEvent);
                 _logger.Information("An event was sent to {Subject}. {@Event}", transferRequestFailEvent.Subject, transferRequestFailEvent);
