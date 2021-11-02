@@ -14,7 +14,7 @@ Important to notice that this isn't a bunch of microservices. It is a monolith t
 
 ### Getting started
 Get the system started by following the steps below:
-- run the file ./src/**docker-compose.yml**
+- run Docker Compose for the file ./src/**docker-compose.yml**
 - execute the file ./src/**update-database.cmd** to apply the _migations_ into database
 - execute the file ./src/**run-system.cmd**
 
