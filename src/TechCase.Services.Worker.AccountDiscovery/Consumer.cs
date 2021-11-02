@@ -3,6 +3,7 @@ using Serilog;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
@@ -47,8 +48,13 @@ namespace TechCase.Services.Worker.AccountDiscovery
                 return;
             }
 
-            var originAccount = await ValidateAccountNumner(transferRequest.OriginAcc);
-            var destinationAccount = await ValidateAccountNumner(transferRequest.DestinationAcc);
+            var originAccount = await GetAccountDataFromAcessoService(transferRequest.OriginAcc);
+            if (HaveToAbortOrRetry(eventReceived, originAccount))
+                return;
+
+            var destinationAccount = await GetAccountDataFromAcessoService(transferRequest.DestinationAcc);
+            if (HaveToAbortOrRetry(eventReceived, destinationAccount))
+                return;
 
             if (originAccount is null || destinationAccount is null)
             {
@@ -58,6 +64,13 @@ namespace TechCase.Services.Worker.AccountDiscovery
             }
             else
             {
+                if (new double[] { originAccount.balance, destinationAccount.balance }.Contains(-1))
+                {
+                    _logger.Error("Message reached the attempt limit of {AttempLimit}. {@EventReceived}", AttempLimit, eventReceived);
+                    AccountDiscoveryFailed(eventReceived, $"");
+                    return;
+                }
+
                 SaveNewAccount(new Account { AccountNumber = originAccount.accountNumber, Balance = originAccount.balance });
                 SaveNewAccount(new Account { AccountNumber = destinationAccount.accountNumber, Balance = destinationAccount.balance });
 
@@ -75,7 +88,7 @@ namespace TechCase.Services.Worker.AccountDiscovery
             _logger.Information("An event was sent to {Subject}. {@Event}", transferRequestFailEvent.Subject, transferRequestFailEvent);
         }
 
-        private async Task<AccountResponse> ValidateAccountNumner(string accountNumber)
+        private async Task<AccountResponse> GetAccountDataFromAcessoService(string accountNumber)
         {
             Stopwatch stopwatch = new();
             HttpRequestMessage requestMessage = new(HttpMethod.Get, $"api/Account/{accountNumber}");
@@ -88,17 +101,18 @@ namespace TechCase.Services.Worker.AccountDiscovery
                 stopwatch.Stop();
 
                 var responseContent = await responseMessage.Content.ReadAsStringAsync();
-                if (responseMessage.IsSuccessStatusCode)
-                    return JsonSerializer.Deserialize<AccountResponse>(responseContent);
-                else
-                    _logger.Warning("Acesso-API has returned StatusCode {StatusCode} and Message: \"{ResponseContent}\"", responseMessage.StatusCode, responseContent);
-
+                responseMessage.EnsureSuccessStatusCode();
+                return JsonSerializer.Deserialize<AccountResponse>(responseContent);
             }
             catch (Exception ex)
             {
                 stopwatch.Stop();
                 if (ex is HttpRequestException httpRequestException)
-                    _logger.Error(httpRequestException, "Acesso-API has returned StatusCode {StatusCode}", httpRequestException.StatusCode);
+                {
+                    _logger.Error(httpRequestException, "Acesso-API was unsuccessful", httpRequestException.StatusCode);
+                    if (httpRequestException.StatusCode == System.Net.HttpStatusCode.NotFound)
+                        return new AccountResponse(null, -1) with { comments = $"Account {accountNumber} not found" };
+                }
                 else
                     _logger.Error(ex, "Error when trying to reach Acesso-API");
             }
@@ -106,9 +120,26 @@ namespace TechCase.Services.Worker.AccountDiscovery
             {
                 _logger.Information("{ElapsedMilliseconds} milliseconds chatting with Acesso-API", stopwatch.ElapsedMilliseconds);
             }
-
-            _logger.Warning("It was not possible validate the {accountNumber} in Acesso's service", accountNumber);
             return null;
+        }
+
+        private bool HaveToAbortOrRetry(Event eventReceived, AccountResponse accountResponse)
+        {
+            if (accountResponse is null) //retry
+            {
+                eventReceived.MarkForRetry();
+                _publisher.Publish(eventReceived);
+                _logger.Warning("Event sent for retry, attempt: {AttempCount}", eventReceived.AttemptCount);
+                return true;
+            }
+
+            if (accountResponse.balance == -1) //abort
+            {
+                _logger.Error(accountResponse.comments);
+                AccountDiscoveryFailed(eventReceived, accountResponse.comments);
+                return true;
+            }
+            return false;
         }
 
         private void SaveNewAccount(Account account)
@@ -128,6 +159,5 @@ namespace TechCase.Services.Worker.AccountDiscovery
             }
         }
     }
-
-    public record AccountResponse(string accountNumber, double balance);
+    public record AccountResponse(string accountNumber, double balance, string comments = null);
 }
