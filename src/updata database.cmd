@@ -1,0 +1,1 @@
+dotnet ef --startup-project .\TechCase.Services.Api.FundTransfer database update
