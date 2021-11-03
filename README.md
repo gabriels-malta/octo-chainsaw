@@ -10,7 +10,7 @@ Important to notice that this isn't a bunch of microservices. It is a monolith t
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Visual Studio 2019 or Visual Studio Code](https://visualstudio.microsoft.com/pt-br/downloads/)
-- [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab) _(this is required to execute all queue workers in at once)_
+- [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab) _(this is required to execute all queue workers at once)_
 
 ### Getting started
 Get the system started by following the steps below:
