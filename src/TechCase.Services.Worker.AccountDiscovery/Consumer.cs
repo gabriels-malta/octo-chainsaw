@@ -49,35 +49,19 @@ namespace TechCase.Services.Worker.AccountDiscovery
             }
 
             var originAccount = await GetAccountDataFromAcessoService(transferRequest.OriginAcc);
-            if (HaveToAbortOrRetry(eventReceived, originAccount))
+            if (ShouldAbortOrRetry(eventReceived, originAccount))
                 return;
 
             var destinationAccount = await GetAccountDataFromAcessoService(transferRequest.DestinationAcc);
-            if (HaveToAbortOrRetry(eventReceived, destinationAccount))
+            if (ShouldAbortOrRetry(eventReceived, destinationAccount))
                 return;
 
-            if (originAccount is null || destinationAccount is null)
-            {
-                eventReceived.MarkForRetry();
-                _publisher.Publish(eventReceived);
-                _logger.Warning("Event sent for retry, attempt: {AttempCount}", eventReceived.AttemptCount);
-            }
-            else
-            {
-                if (new double[] { originAccount.balance, destinationAccount.balance }.Contains(-1))
-                {
-                    _logger.Error("Message reached the attempt limit of {AttempLimit}. {@EventReceived}", AttempLimit, eventReceived);
-                    AccountDiscoveryFailed(eventReceived, $"");
-                    return;
-                }
+            SaveNewAccount(new Account { AccountNumber = originAccount.accountNumber, Balance = originAccount.balance });
+            SaveNewAccount(new Account { AccountNumber = destinationAccount.accountNumber, Balance = destinationAccount.balance });
 
-                SaveNewAccount(new Account { AccountNumber = originAccount.accountNumber, Balance = originAccount.balance });
-                SaveNewAccount(new Account { AccountNumber = destinationAccount.accountNumber, Balance = destinationAccount.balance });
-
-                var discoveryAccountsEvent = Event.UseToSeedNew(transferRequest, QueueTopics.FundTransferTriggered, basedOn: eventReceived);
-                _publisher.Publish(discoveryAccountsEvent);
-                _logger.Information("An event was sent to {Subject}. {@Event}", discoveryAccountsEvent.Subject, discoveryAccountsEvent);
-            }
+            var discoveryAccountsEvent = Event.UseToSeedNew(transferRequest, QueueTopics.FundTransferTriggered, basedOn: eventReceived);
+            _publisher.Publish(discoveryAccountsEvent);
+            _logger.Information("An event was sent to {Subject}. {@Event}", discoveryAccountsEvent.Subject, discoveryAccountsEvent);
         }
 
         private void AccountDiscoveryFailed(Event eventReceived, string errorMessage)
@@ -123,7 +107,7 @@ namespace TechCase.Services.Worker.AccountDiscovery
             return null;
         }
 
-        private bool HaveToAbortOrRetry(Event eventReceived, AccountResponse accountResponse)
+        private bool ShouldAbortOrRetry(Event eventReceived, AccountResponse accountResponse)
         {
             if (accountResponse is null) //retry
             {
